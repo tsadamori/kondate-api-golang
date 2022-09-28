@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS menu_lists
+(
+  id SERIAL PRIMARY KEY,
+  user_id BIGINT UNSIGNED NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  INDEX user_index (user_id),
+  FOREIGN KEY (user_id) REFERENCES users (id)
+)

@@ -1,4 +1,4 @@
-package main
+package model
 
 import (
 	"fmt"
@@ -12,7 +12,7 @@ import (
 
 var Db *gorm.DB
 
-func main() {
+func init() {
 	var user, password, db_host, db_port, db_name string
 	var err error
 	

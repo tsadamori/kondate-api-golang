@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS ingredients
+(
+  id SERIAL PRIMARY KEY,
+  menu_id BIGINT UNSIGNED NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  quantity INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  INDEX menu_index (menu_id),
+  FOREIGN KEY (menu_id) REFERENCES menus (id)
+);
