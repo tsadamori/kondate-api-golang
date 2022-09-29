@@ -1,14 +1,8 @@
 package model
 
-import (
-	"fmt"
-
-	"gorm.io/gorm"
-)
 
 type User struct {
-	gorm.Model
-	Id int
+	Id uint
 	Name string
 	Email string
 	Password string
@@ -16,9 +10,8 @@ type User struct {
 	ImageUrl string
 }
 
-func GetAllUsers() (datas []User) {
-	result := Db.Find(&datas)
-	fmt.Println(datas)
+func GetAllUsers() (data []User) {
+	result := Db.Find(&data)
 	if result.Error != nil {
 		panic(result.Error)
 	}

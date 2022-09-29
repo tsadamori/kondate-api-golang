@@ -18,14 +18,10 @@ func init() {
 	
 	loadEnv(&user, &password, &db_host, &db_port, &db_name)
 
-	var path string = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=true", user, password, db_host, db_port, db_name)
-	dialector := mysql.Open(path)
-	fmt.Println(path)
-
-	if Db, err = gorm.Open(dialector); err != nil {
-		connect(dialector, 100)
+	var dsn string = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=true", user, password, db_host, db_port, db_name)
+	if Db, err = gorm.Open(mysql.Open(dsn)); err != nil {
+		connect(mysql.Open(dsn), 100)
 	}
-	fmt.Println("db connected!")
 }
 
 func connect(dialector gorm.Dialector, count uint) {
