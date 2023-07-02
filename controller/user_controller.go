@@ -22,3 +22,10 @@ func ShowAllUsers(c *gin.Context) {
 	data := model.GetAllUsers()
 	c.JSON(200, data)
 }
+
+func ShowUserById(c *gin.Context) {
+	id := c.Param("id")
+	data := model.GetUserById(id)
+	c.JSON(200, data)
+}
+
