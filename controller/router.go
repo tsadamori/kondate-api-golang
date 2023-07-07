@@ -6,5 +6,6 @@ func GetRouter() *gin.Engine {
 	r := gin.Default()
 	r.GET("/users", ShowAllUsers)
 	r.GET("/users/:id", ShowUserById)
+	r.POST("/login", Login)
 	return r
 }
