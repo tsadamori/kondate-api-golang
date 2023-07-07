@@ -6,28 +6,24 @@ import (
 	"github.com/tsadamori/kondate-api-golang/model"
 )
 
-type ErrorMessage struct {
-	error string
-}
-
 func Login(c *gin.Context) {
 	email := c.PostForm("email")
 	password := c.PostForm("password")
 
 	isValidUser := model.IsValidUser(email, password)
 	if isValidUser == false {
-		errorMessage := ErrorMessage{
-			error: "Login failed.",
+		errorMessage := gin.H{
+			"error": "Login failed.",
 		}
 		c.JSON(401, errorMessage)
 	}
 
-	token, err := auth.CreateJWTSignedToken(email, password)
+	token, err := auth.CreateJWTSignedToken(email)
 	if err != nil {
-		errorMessage := ErrorMessage{
-			error: "Create JWT signed token failed.",
+		errorMessage := gin.H{
+			"error": "Create JWT signed token failed.",
 		}
 		c.JSON(500, errorMessage)
 	}
-	c.SetCookie("token", token, 3600, "/", "localhost", false, false)
+	c.SetCookie(auth.TokenKey, token, 3600, "/", "localhost", false, false)
 }
