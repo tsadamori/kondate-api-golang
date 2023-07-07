@@ -16,6 +16,7 @@ func GetRouter() *gin.Engine {
 		r.GET(namespace + "/users", ShowAllUsers)
 		r.GET(namespace + "/users/:id", ShowUserById)
 		r.POST(namespace + "/users", RegisterUser)
+		r.GET(namespace + "/categories", ShowAllCategories)
 	}
 	return r
 }
