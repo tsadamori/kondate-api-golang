@@ -18,7 +18,7 @@ func init() {
 	
 	loadEnv(&user, &password, &db_host, &db_port, &db_name)
 
-	var dsn string = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=true", user, password, db_host, db_port, db_name)
+	dsn := getDsn(user, password, db_host, db_port, db_name)
 	if Db, err = gorm.Open(mysql.Open(dsn)); err != nil {
 		connect(mysql.Open(dsn), 100)
 	}
@@ -45,4 +45,8 @@ func loadEnv(user *string, password *string, db_host *string, db_port *string, d
 	*db_port = os.Getenv("MYSQL_PORT")
 	*db_host = os.Getenv("MYSQL_HOST")
 	*db_name = os.Getenv("MYSQL_DATABASE")
+}
+
+func getDsn(user, password, db_host, db_port, db_name string) string {
+	return fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=true", user, password, db_host, db_port, db_name)
 }
