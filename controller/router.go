@@ -12,6 +12,7 @@ func GetRouter() *gin.Engine {
 	r.POST(namespace + "/login", Login)
 	r.Use(middleware.AuthMiddleware)
 	{
+		r.DELETE(namespace + "/logout", Logout)
 		r.GET(namespace + "/users", ShowAllUsers)
 		r.GET(namespace + "/users/:id", ShowUserById)
 		r.POST(namespace + "/users", RegisterUser)
