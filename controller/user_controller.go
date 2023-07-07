@@ -19,7 +19,7 @@ func ShowAllUsers(c *gin.Context) {
 		offset = 0
 	}
 
-	data := model.GetAllUsers()
+	data := model.GetAllUsers(limit, offset)
 	c.JSON(200, data)
 }
 

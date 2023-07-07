@@ -20,8 +20,8 @@ type UserToRegister struct {
 	ImageUrl string
 }
 
-func GetAllUsers() (data []User) {
-	result := Db.Find(&data)
+func GetAllUsers(limit, offset int) (data []User) {
+	result := Db.Limit(limit).Offset(offset).Find(&data)
 	if result.Error != nil {
 		panic(result.Error)
 	}
