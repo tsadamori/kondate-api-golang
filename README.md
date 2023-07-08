@@ -11,3 +11,9 @@ migrate create -ext sql -dir database/migrations -seq [file name]
 ```bash
 migrate -path database/migrations -database 'mysql://[user]:[password]@tcp([host]:[port])/[db_name]' [up/down]
 ```
+
+## test
+
+```bash
+go test -v ./tests/...
+```
