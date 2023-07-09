@@ -2,19 +2,18 @@ package auth
 
 import (
 	"errors"
-	"time"
 
 	"github.com/golang-jwt/jwt/v5"
 )
 
 // TODO
-var secretKey string = "SECRET_KEY"
-var TokenKey string = "token"
+const secretKey string = "SECRET_KEY"
+const TokenKey string = "token"
 
-func CreateJWTSignedToken(email string) (string, error) {
+func CreateJWTSignedToken(email string, expUnix int64) (string, error) {
 	claims := jwt.MapClaims{
 		"email": email,
-		"exp": time.Now().Add(time.Hour * 24).Unix(),
+		"exp": expUnix,
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	tokenString, err := token.SignedString([]byte(secretKey))

@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"time"
+
 	"github.com/gin-gonic/gin"
 	"github.com/tsadamori/kondate-api-golang/auth"
 	"github.com/tsadamori/kondate-api-golang/model"
@@ -18,7 +20,7 @@ func Login(c *gin.Context) {
 		c.JSON(401, errorMessage)
 	}
 
-	token, err := auth.CreateJWTSignedToken(email)
+	token, err := auth.CreateJWTSignedToken(email, time.Now().Add(time.Hour * 24).Unix())
 	if err != nil {
 		errorMessage := gin.H{
 			"error": "Create JWT signed token failed.",
